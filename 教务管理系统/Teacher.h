@@ -6,6 +6,8 @@
 */
 #define TEACHER
 #include "PublicHead.h"
+#include "CourseList.h"
+#include "File.h"
 
 /**简单类型定义**/
 typedef int TeaID;

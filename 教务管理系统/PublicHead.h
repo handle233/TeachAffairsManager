@@ -56,22 +56,3 @@ struct Date
 	int Year; int Month; int Day;
 };
 #endif // !版本控制变量
-//包括Student
-#ifndef STUDENT //这个宏定义主要是为了表示Student.h文件已经被引用，避免重复引用，循环引用
-#include "Student.h"
-#endif // !STUDENT
-//包括Teacher
-#ifndef TEACHER
-#include "Teacher.h"
-#endif // !TEACHER
-//包括File
-#ifndef FILEMANAGE
-#include "File.h"
-#endif // !FILEMANAGE
-//包括CourseList
-#ifndef COURSELIST
-#include "CourseList.h"
-#endif // !COURSELIST
-
-
-

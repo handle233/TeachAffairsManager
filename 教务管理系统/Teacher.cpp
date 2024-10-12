@@ -71,7 +71,7 @@ int SaveTeacherToFile(const char* FilePath)
 	FILE* fTea = SaveFile(FilePath, HeadString);
 	CHECK_NULL(fTea)
 
-	int RealNum = GetNumOfStudents();
+	int RealNum = GetNumOfTeachers();
 	fwrite(&RealNum, sizeof(int), 1, fTea);
 
 	for (int a = 0; a < NumOfTeachers; a++) {

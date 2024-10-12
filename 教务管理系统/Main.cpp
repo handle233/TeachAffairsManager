@@ -4,6 +4,10 @@
 * Copyright <c> ciallo all right reserved.
 */
 #include "PublicHead.h"
+#include "Student.h"
+#include "Teacher.h"
+#include "CourseList.h"
+
 #include <Windows.h>
 #pragma comment(lib,"winmm.lib")
 

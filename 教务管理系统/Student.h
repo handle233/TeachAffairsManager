@@ -6,6 +6,8 @@
 */
 #define STUDENT
 #include "PublicHead.h"
+#include "CourseList.h"
+#include "File.h"
 
 /**简单类型定义**/
 typedef int StuID;
@@ -30,6 +32,7 @@ struct Student
 	char* name;//名字
 	StudentInformation Inf;//学生个人信息
 	bool remove;//删除标识
+	Courses CS;
 };
 
 /**全局变量定义**/

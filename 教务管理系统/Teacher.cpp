@@ -4,6 +4,7 @@
 * Copyright <c> ciallo all right reserved.
 */
 #include "Teacher.h"
+#include "File.h"
 
 /**关键全局变量**/
 int NumOfTeachers;//AllStus中保存教师数目

@@ -4,10 +4,10 @@
 * file   : Teacher.h
 * Copyright <c> ciallo all right reserved.
 */
+#ifndef TEACHER
 #define TEACHER
 #include "PublicHead.h"
 #include "CourseList.h"
-#include "File.h"
 
 /**简单类型定义**/
 typedef int TeaID;
@@ -115,3 +115,5 @@ Teacher* SeekTeacher(TeaID SeekTea);
 返回值 Teacher ID -1:分配内存失败或参数不合法 -2:分配教师ID重复
 */
 inline Teacher* IterateTeacher(int *Index);
+
+#endif

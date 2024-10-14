@@ -5,6 +5,7 @@
 */
 #define COURSELIST
 #include "CourseList.h"
+#include "File.h"
 
 
 Period NewPeriod(Time t1, Time t2) {

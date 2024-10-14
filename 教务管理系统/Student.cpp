@@ -4,6 +4,7 @@
 * Copyright <c> ciallo all right reserved.
 */
 #include "Student.h"
+#include "File.h"
 
 /**关键全局变量**/
 int NumOfStudents;//AllStus中保存学生数目

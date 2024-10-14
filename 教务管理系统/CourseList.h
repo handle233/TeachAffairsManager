@@ -6,13 +6,10 @@
 */
 #define COURSELIST
 #include "PublicHead.h"
-#ifndef TEACHER
-#include "Teacher.h"
-#endif // !TEACHER
-#ifndef STUDENT
-#include "Student.h"
-#endif // !STUDENT
 #include "File.h"
+
+/**简单类型定义**/
+typedef int CourseID;
 
 /**简单结构体定义**/
 struct Time {
@@ -23,7 +20,6 @@ struct Period {
 };
 //课程表主结构体定义
 struct Courses {
-	
 };
 
 /**Period操作函数**/

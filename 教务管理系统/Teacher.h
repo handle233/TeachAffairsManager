@@ -41,18 +41,18 @@ extern Teacher* AllTeas;
 
 /**公开函数**/
 /*
-初始化教师文件，创建一个空教师文件，重置AllStus
+初始化教师文件，创建一个空教师文件，重置AllTeas
 参数1 文件路径
 */
 void InitialTeachers(const char* FilePath);
 /*
-从文件中加载教师，分配AllStus
+从文件中加载教师，分配AllTeas
 参数1 文件路径
 返回值 -1:文件打开失败或者文件头出错，-2:内存分配失败
 */
 int LoadTeacherFromFile(const char *FilePath);
 /*
-将读取教师信息保存到文件中，并且释放AllStus
+将读取教师信息保存到文件中，并且释放AllTeas
 参数1 文件路径
 返回值 -1:文件打开失败
 */
@@ -85,9 +85,9 @@ Teacher MakeTeacher(TeacherInformation TeaInf, const char* name, const TeaID New
 */
 void DeConstructTeacher(Teacher* teacher);
 
-/**AllStus数据库操作函数**/
+/**AllTeas数据库操作函数**/
 /*
-获取AllStus中有效Teachers数量
+获取AllTeas中有效Teachers数量
 返回值 Teachers数量
 */
 int GetNumOfTeachers();
@@ -106,7 +106,7 @@ TeaID DeleteTeacher(TeaID Id);
 /*
 向数据库查找一名教师
 参数1 Teacher结构体(TeaID必须大于0)
-返回值 Teacher ID NULL:没找到教师或参数不合法，也可能是AllStus没有初始化
+返回值 Teacher ID NULL:没找到教师或参数不合法，也可能是AllTeas没有初始化
 */
 Teacher* SeekTeacher(TeaID SeekTea);
 /*

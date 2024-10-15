@@ -7,16 +7,23 @@
 #include "Student.h"
 #include "Teacher.h"
 #include "CourseList.h"
+#include "UserInterface.h"
 
 #include <Windows.h>
 #pragma comment(lib,"winmm.lib")
 
 int main() {
 
-	printf("hello world \0 genshin");
+	PrintBorder();
+	ShowTitle("教务管理系统");
+	InputBox("输入密码", 1);
 	getch();
+	
+	return 0;
+}
 
-	puts("generate");
+/*
+puts("generate");
 	LoadStudentFromFile("Students.txt");
 	int Time = timeGetTime();
 	for (int a = 0; a < 100000; a++) {
@@ -33,6 +40,4 @@ int main() {
 	}
 	printf("Cost %d ms\n", timeGetTime() - Time);
 	SaveStudentToFile("Students.txt");
-	
-	return 0;
-}
+*/

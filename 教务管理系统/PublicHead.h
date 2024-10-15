@@ -13,6 +13,7 @@
 #include <string.h>
 //取消C4996警告，以便scanf等函数不报错
 #pragma warning(disable:4996)
+#pragma warning(disable:4267)
 //表示该参数用于接受函数的输出
 #define _IN_
 //表示该参数用于接受函数的输入
@@ -47,9 +48,13 @@
 #define VERSION_CONTROL
 
 #define VERSION 1
+
+#define WEEKDAY 7
 /**简单类型定义**/
 //性别，看不懂的抬走
 enum sex { male, female, other };
+enum Weekday { Sun, Mon, Tue, Wed, Thu, Fri, Sat };
+void gotoxy(int x, int y);
 //日期
 struct Date
 {

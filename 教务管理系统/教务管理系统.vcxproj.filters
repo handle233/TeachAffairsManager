@@ -30,6 +30,12 @@
     <ClCompile Include="CourseList.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="UserInterface.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PublicHead.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Student.h">
@@ -45,6 +51,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="CourseList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

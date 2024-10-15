@@ -136,6 +136,7 @@ int OpenupClass(CourseID course, int StartTime, int EndTime, Weekday WhichDay)
 		CHECK_NULLPTR(NewClasses);
 	}
 	NumOfClasses++;
+
 	Class Cour = { 0 };
 
 	Course* pCou = NULL;

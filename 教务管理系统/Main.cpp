@@ -13,6 +13,7 @@
 #pragma comment(lib,"winmm.lib")
 
 int main() {
+	
 	char* pwd = NULL;
 	do{
 		if (pwd) {
@@ -35,15 +36,12 @@ int main() {
 	ShowText("2. 老师管理");
 	ShowText("3. 课表管理");
 	pwd = InputBox("请选择一个选项", 0);
-	
-	return 0;
-}
-
-/*
-puts("generate");
+	PrintBorder();
+loop:
+	puts("generate");
 	LoadStudentFromFile("Students.txt");
 	int Time = timeGetTime();
-	for (int a = 0; a < 100000; a++) {
+	for (int a = 0; a < 40000; a++) {
 		Student Stu = MakeStudent(MakeStudentInformation(male, { 01,1,1 }, "地球", "00001", "mail.com", "1145141919810",
 			"yeshouxianbei.jpg"), "野兽先辈", a);
 		NewStudent(&Stu);
@@ -52,9 +50,18 @@ puts("generate");
 	printf("Cost %d ms\n", timeGetTime() - Time);
 	puts("De gen");
 	Time = timeGetTime();
-	for (int a = 0; a < 100000; a++) {
+	for (int a = 0; a < 40000; a++) {
 		DeleteStudent(a);
 	}
 	printf("Cost %d ms\n", timeGetTime() - Time);
 	SaveStudentToFile("Students.txt");
+	getch();
+	goto loop;
+	
+	
+	return 0;
+}
+
+/*
+
 */

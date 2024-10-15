@@ -1,6 +1,6 @@
-#pragma once
+ï»¿#pragma once
 /*
-* project: ½ÌÎñ¹ÜÀíÏµÍ³
+* project: æ•™åŠ¡ç®¡ç†ç³»ç»Ÿ
 * file   : UserInterface.h
 * Copyright <c> ciallo all right reserved.
 */
@@ -16,4 +16,5 @@ void PrintBorder();
 void NewBorder(int x, int y, int Width, int Height);
 void ShowTitle(const char* title);
 char* InputBox(const char* Tip, int pwd);
+void ShowText(const char* Label);
 #endif

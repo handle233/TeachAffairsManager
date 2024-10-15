@@ -13,11 +13,28 @@
 #pragma comment(lib,"winmm.lib")
 
 int main() {
-
+	char* pwd = NULL;
+	do{
+		if (pwd) {
+			free(pwd);
+		}
+		PrintBorder();
+		ShowTitle("教务管理系统");
+		pwd = InputBox("输入密码", 1);
+		if (strcmp(pwd, "114514") != 0) {
+			char tip[] = "密码错误";
+			NewBorder(WIDTH / 2 - strlen(tip), HEIGHT / 2 - 3, strlen(tip) + 10, 5);
+			ShowText("密码错误");
+			getch();
+		}
+	} while (strcmp(pwd, "114514") != 0);
+	free(pwd);
 	PrintBorder();
-	ShowTitle("教务管理系统");
-	InputBox("输入密码", 1);
-	getch();
+	ShowTitle("教务管理系统 - 主界面");
+	ShowText("1. 学生管理");
+	ShowText("2. 老师管理");
+	ShowText("3. 课表管理");
+	pwd = InputBox("请选择一个选项", 0);
 	
 	return 0;
 }

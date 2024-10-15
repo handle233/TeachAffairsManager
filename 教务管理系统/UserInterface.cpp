@@ -20,7 +20,7 @@ void NewBorder(int x, int y, int Width, int Height)
 	memset(s_Head, BLOCK, Width * sizeof(char));
 	s_Head[Width] = '\0';
 	printf(s_Head);
-	for (int a = 0; a < HEIGHT - 2; a++) {
+	for (int a = 0; a < Height - 2; a++) {
 		gotoxy(x, y + a + 1);
 		putchar(BLOCK);
 		gotoxy(x + Width - 1, y + a + 1);
@@ -35,7 +35,7 @@ void ShowTitle(const char* title)
 {
 	int x = (WIDTH - 2) / 2 - strlen(title) / 2;
 	for (int a = 0; a < x; a++)putchar(' ');
-	printf("%s\n#", title);
+	printf("%s\n%c", title,BLOCK);
 
 }
 
@@ -50,12 +50,26 @@ char* InputBox(const char* Tip, int pwd) {
 			ch >= 'a' && ch <= 'z' ||
 			ch >= 'A' && ch <= 'Z') {
 			str[index] = ch;
+			if (index >= AllocCount * 64 - 1) {
+				char* newstr = (char*)realloc(str,(AllocCount + 1) * sizeof(char));
+				CHECK_NULLPTR(newstr);
+				str = newstr;
+				AllocCount++;
+			}
 			index++;
-			printf("%c", ch);
+			if (pwd) {
+				printf("*");
+			}
+			else {
+				printf("%c", ch);
+			}
 		}
 		else {
 			switch (ch) {
 			case 8:
+				if (index <= 0) {
+					break;
+				}
 				printf("\b \b");
 				str[index] = 0;
 				index--;
@@ -66,5 +80,11 @@ char* InputBox(const char* Tip, int pwd) {
 		}
 		ch = getch();
 	}
+	printf("\n#");
 	return str;
+}
+
+void ShowText(const char* Label)
+{
+	printf("  %s\n%c", Label, BLOCK);
 }

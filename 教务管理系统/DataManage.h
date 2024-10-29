@@ -1,17 +1,19 @@
 #pragma once
-#include "PublicHead.h"
-#include "File.h"
 /*
 * project: 教务管理系统
 * file   : DataManage.h
 * Copyright <c> ciallo all right reserved.
 */
+#ifndef DATAMANAGE
+#define DATAMANAGE
+#include "PublicHead.h"
+#include "File.h"
 
-typedef int ID;
+typedef int Ident;
 
 struct DataBlock {
-	void* pData;
-	bool Delete;
+	void* pData;//数据块基地址
+	bool Delete;//删除标识
 };
 
 struct DataCluster{
@@ -26,17 +28,21 @@ struct DataCluster{
 	FILE* fp;//关联文件
 };
 
-typedef int (*SeekDataProc)(void* pData);
+typedef int (*SeekDataProc)(void* pData, void* args);
 typedef int (*ReadDataProc)(FILE* fp, void *pData);
 typedef int (*WriteDataProc)(FILE* fp, void* pData);
 
 int InitialDataCluster(DataCluster* Datas, const char* path, int BlockSize, const char* FileHeader);
+int FormattedDataCluster(DataCluster* Datas);
 int LoadDataFromFile(DataCluster* Datas,ReadDataProc RDP, const char* path, int BlockSize, const char* FileHeader);
 void SetAllocSize(DataCluster* Datas, int NewSize);
 int SaveDataToFile(DataCluster* Datas,WriteDataProc WDP);
 
-ID AddData(DataCluster* Datas, void* pData);
-int DeleteData(DataCluster* Datas, ID id);
-void* SeekData(DataCluster* Datas, SeekDataProc SeekPro);
+Ident AddData(DataCluster* Datas, void* pData);
+int DeleteData(DataCluster* Datas, Ident id);
+void* SeekData(DataCluster* Datas, SeekDataProc SeekPro,void* args, int* index);
 void* IterateData(DataCluster* Datas, int* Index);
 int GetLength(DataCluster* Datas);
+
+
+#endif // !DATAMANAGE

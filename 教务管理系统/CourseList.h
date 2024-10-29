@@ -7,62 +7,107 @@
 #ifndef COURSELIST
 #define COURSELIST
 #include "PublicHead.h"
-#include "File.h"
+#include "DataManage.h"
 
 /**简单类型定义**/
 typedef int CourseID;
 typedef int ClassID;
-extern int CourseCodeLength;
 
 /**简单结构体定义**/
 struct Time {
-	int Hour, Min, Sec;
+	int Hour, Min;
 };
 struct Period {
-	Time Start, End;
+	int Start, End;
 };
 /**结构体类型定义**/
 //课程时间表结构体
-struct TimeList {
-	int DailyCourseCount;
-	Period* ClassTime;
-}extern SemesterArrange;//学期时间表安排
+
+struct TimeTable {
+	int NumOfCourse;
+	Time* ClassTime;
+};//学期时间表安排
+
+extern TimeTable SemesterArrange;
 //课程信息结构体
+struct CourseInformation {
+	char* CourseCode;
+	char* Intro;
+};
 struct Course {
 	CourseID ID;
-	char* Classname,*Intro,*CourseCode;
+	char* CourseName;
 	int Teacher;
 	int MaxAttendee;
+	CourseInformation Inf;
 };
 //课程班级结构体
+struct StuSituation {
+	int StuID;
+	int Grade;
+	int Attendence;
+};
+struct ClassInformation {
+	int NumOfStus;
+	StuSituation *StuSitus;
+	Period WeekDuration;
+};
 struct Class {
 	ClassID ID;
 	CourseID course;
-	int StartTime, EndTime;
+	Period Duration;
 	Weekday Day;
-	int NumOfStus;
-	int* StusID;
+	char *ClassInfPath;
 };
-//课程表主结构体定义
-struct CourseList {
-	Class** Matrix;
-};
+/****关键全局变量****/
+extern DataCluster AllCourse;
+extern DataCluster AllClass;
+/****函数****/
 
-/**Period操作函数**/
-Period NewPeriod(Time t1, Time t2);
-void InitialSemester(const char* path, int CourseNum,int LengthOfCourseCode,Period Periods,...);
+int InitialSemester(const char* path,TimeTable *Table);
+void InitialCourses(const char* path);
+void InitialClasses(const char* path);
+
 int LoadSemesterFromFile(const char* path);
-int SaveSemesterToFile(const char* path);
+int LoadCoursesFromFile(const char* path);
+int LoadClassesFromFile(const char* path);
 
-int SetupCourse(const char Classname[], const char Introduction[], const char* CourseCode,int TeacherID,int MaxAttend );
-int OpenupClass(CourseID course,int StartTime, int EndTime, Weekday WhichDay);
+int SaveCoursesToFile();
+int SaveClassesToFile();
 
-int ChooseClass(ClassID Class, int StuID);
-CourseList* GenerateStuCourseList(int StuID);
-CourseList* GenerateTeaCourseList(int StuID);
-void DeConstructCourseList(CourseList* p);
+TimeTable MakeTimeTable(int NumOfTable,Time Class,...);
+Time makeTime(int H, int M);
+void DeConstructTimeTable(TimeTable* table);
 
-Course* IterateCourse(int *Index);
+Course MakeCourse(CourseInformation Inf,const char* CourseName,int MaxAttend,CourseID Id,int NumofTea,int Tea,...);
+CourseInformation MakeCourseInformation(const char* ClassCode,const char*Intro);
+void DeConstructCourse(Course* course);
+void DeConstructCourseInformation(CourseInformation Inf);
+
+Class MakeClass(ClassID Id,Period Duration,Weekday Day,CourseID Course);
+ClassInformation MakeClassInformation(int AttendStuNum,Period DuringWeek);
+void DeConstructClass(Class* Class);
+void DeConstructClassInformation(ClassInformation inf);
+
+int NewCourse(Course* course);
+int NewClass(Class* Cl);
+
+Course* SeekCourseById(CourseID Id);
+Class* SeekClassById(ClassID Id);
+
+Course* IterateCourse(int* Index);
 Class* IterateClass(int* Index);
+
+int LoadClassInfFromFile(DataCluster* InfClu, Class* cl);
+int SaveClassInfFromFile(DataCluster* InfClu, Class* cl, ClassInformation* Inf);
+
+int CheckArrival(ClassID Cl, int StuID);
+int ReadArrival(ClassID Cl, int Stus);
+
+int ChooseClass(ClassID Cl, int StuID);
+ClassInformation ReturnClassStudentName(ClassID Cl);
+
+int LoginGrade(ClassID Cl, int StuID,int NewGrade);
+int SeekGrade(ClassID Cl, int Stus);
 
 #endif

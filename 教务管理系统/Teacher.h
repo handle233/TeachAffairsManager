@@ -7,6 +7,7 @@
 #ifndef TEACHER
 #define TEACHER
 #include "PublicHead.h"
+#include "DataManage.h"
 #include "CourseList.h"
 
 /**简单类型定义**/
@@ -24,6 +25,7 @@ struct TeacherInformation {
 	char* PhoneNumber;//电话
 	char* Title;//职称 
 	char* PersonalInf;//个人简介 
+	int pwdHash;
 };
 
 //教师结构体
@@ -32,12 +34,12 @@ struct Teacher
 	int Id;//工号 
 	char* name;//名字
 	TeacherInformation Inf;//教师个人信息
-	bool remove;
+	ClassID *ClassList;
 };
 
 /**全局变量定义**/
 //保存读取部分教师全体信息
-extern Teacher* AllTeas;
+extern DataCluster AllTea;
 
 /**公开函数**/
 /*
@@ -114,6 +116,7 @@ Teacher* SeekTeacher(TeaID SeekTea);
 参数1 Index指针，用于标识枚举进度，每次Iterate函数会加一，初始应该设定index为-1
 返回值 Teacher ID -1:分配内存失败或参数不合法 -2:分配教师ID重复
 */
-inline Teacher* IterateTeacher(int *Index);
+int GetTeacherIndex(TeaID SeekTea);
+Teacher* IterateTeacher(int *Index);
 
 #endif

@@ -1,3 +1,8 @@
+/*
+* project: 教务管理系统
+* file   : DataManage.cpp
+* Copyright <c> ciallo all right reserved.
+*/
 #include "DataManage.h"
 
 int InitialDataCluster(DataCluster* Datas,const char* path, int BlockSize, const char* FileHeader)
@@ -14,12 +19,17 @@ int InitialDataCluster(DataCluster* Datas,const char* path, int BlockSize, const
 
 	Datas->FilePath = (char*)malloc(strlen(path) + 1);
 	CHECK_NULLPTR(Datas->FilePath);
-	strcpy(Datas->FilePath, FileHeader);
+	strcpy(Datas->FilePath, path);
 
 	Datas->Size = BlockSize;
 
-	FILE*fp = SaveFile(Datas->FilePath, Datas->FileHeader);
-	int a = 1;
+	return 1;
+}
+
+int FormattedDataCluster(DataCluster* Datas) {
+	FILE* fp = SaveFile(Datas->FilePath, Datas->FileHeader);
+	CHECK_NULLPTR(fp);
+	int a = 0;
 	fwrite(&a, sizeof(int), 1, fp);
 	fclose(fp);
 	return 1;
@@ -32,8 +42,9 @@ int LoadDataFromFile(DataCluster* Datas, ReadDataProc RDP, const char* path, int
 
 	char ReadHead[HEAD_LENGTH] = "";
 	Datas->fp = OpenFile(Datas->FilePath, "r", ReadHead);
+	CHECK_NULLPTR(Datas->fp);
 	CHECK_NULLANY(memcmp(ReadHead, Datas->FileHeader, HEAD_LENGTH))else {
-		return 1;
+		return -1;
 	}
 	fread(&Datas->Length, sizeof(int), 1, Datas->fp);
 	Datas->RealLength = Datas->AllocLength = Datas->Length;
@@ -42,6 +53,7 @@ int LoadDataFromFile(DataCluster* Datas, ReadDataProc RDP, const char* path, int
 	CHECK_NULLPTR(Datas->pData);
 
 	for (int a = 0; a < Datas->Length; a++) {
+		Datas->pData[a].pData = malloc(Datas->Size);
 		RDP(Datas->fp, Datas->pData[a].pData);
 		Datas->pData[a].Delete = false;
 	}
@@ -56,19 +68,29 @@ void SetAllocSize(DataCluster* Datas, int NewSize)
 
 int SaveDataToFile(DataCluster* Datas, WriteDataProc WDP)
 {
+	CHECK_NULLPTR(Datas); CHECK_NULLPTR(WDP);
 
-	fclose(Datas->fp);
+	CHECK_NULLANY(Datas->fp)else {
+		fclose(Datas->fp);
+	}
 	Datas->fp = SaveFile(Datas->FilePath, Datas->FileHeader);
 	CHECK_NULLPTR(Datas->fp);
 	int l = GetLength(Datas);
+	fwrite(&l, sizeof(int), 1, Datas->fp);
 
-	for (int a = 0; a < l;a++) {
-		WDP(Datas->fp, Datas->pData[a].pData);
+	for (int a = 0; a < Datas->RealLength;a++) {
+		if(!Datas->pData->Delete)
+			WDP(Datas->fp, Datas->pData[a].pData);
 	}
+	fclose(Datas->fp);
+	Datas->fp = NULL;
+	free(Datas->pData);
+	Datas->pData = NULL;
+	Datas->AllocLength = Datas->RealLength = Datas->Length = 0;
 	return 0;
 }
 
-ID AddData(DataCluster* Datas,void* pData)
+Ident AddData(DataCluster* Datas,void* pData)
 {
 	CHECK_NULLPTR(Datas); CHECK_NULLPTR(pData);
 
@@ -95,20 +117,24 @@ ID AddData(DataCluster* Datas,void* pData)
 	return Datas->RealLength - 1;
 }
 
-int DeleteData(DataCluster* Datas, ID id)
+int DeleteData(DataCluster* Datas, Ident id)
 {
 	Datas->Length--;
 	Datas->pData[id].Delete = true;
 	return id;
 }
 
-void* SeekData(DataCluster* Datas,SeekDataProc SeekPro)
+void* SeekData(DataCluster* Datas,SeekDataProc SeekPro, void* args,int* index)
 {
 	for (int a = 0; a < Datas->RealLength; a++) {
-		if (Datas->pData[a].Delete == false && SeekPro(Datas->pData[a].pData) == true) {
+		if (Datas->pData[a].Delete == false && SeekPro(Datas->pData[a].pData,args) == true) {
+			if (index != NULL) {
+				*index = a;
+			}
 			return Datas->pData[a].pData;
 		}
 	}
+	return NULL;
 }
 
 void* IterateData(DataCluster* Datas, int* Index)

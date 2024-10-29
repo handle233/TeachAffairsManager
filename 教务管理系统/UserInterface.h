@@ -8,13 +8,16 @@
 #define USERINTERFACE
 #include "PublicHead.h"
 
-#define WIDTH 120
-#define HEIGHT 30
+#define WIDTH 130
+#define HEIGHT 40
 #define BLOCK '#'
+#define LINE '-'
 
 void PrintBorder();
 void NewBorder(int x, int y, int Width, int Height);
+void CenterBorder(int Width, int Height);
 void ShowTitle(const char* title);
 char* InputBox(const char* Tip, int pwd);
 void ShowText(const char* Label);
+void ShowLine();
 #endif

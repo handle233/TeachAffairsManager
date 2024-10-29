@@ -27,9 +27,6 @@
     <ClCompile Include="Teacher.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="CourseList.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="UserInterface.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -37,6 +34,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="DataManage.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CourseList.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Screen.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -53,13 +56,16 @@
     <ClInclude Include="Teacher.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="CourseList.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="UserInterface.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="DataManage.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CourseList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Screen.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

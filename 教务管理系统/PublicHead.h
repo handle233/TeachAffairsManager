@@ -48,7 +48,6 @@
 #define VERSION_CONTROL
 
 #define VERSION 1
-
 #define WEEKDAY 7
 /**简单类型定义**/
 //性别，看不懂的抬走

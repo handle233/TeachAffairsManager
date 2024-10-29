@@ -42,3 +42,10 @@ int ReadString(FILE* fp, _IN_ char** str) {
 	return l;
 }
 
+char* NewString(const char* str)
+{
+	char* t = (char*)calloc(strlen(str) + 1, sizeof(char));
+	memcpy(t, str, strlen(str) + 1);
+	return t;
+}
+

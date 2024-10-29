@@ -31,6 +31,11 @@ void NewBorder(int x, int y, int Width, int Height)
 	gotoxy(x + 1, y + 1);
 }
 
+void CenterBorder(int Width, int Height)
+{
+	NewBorder(WIDTH / 2 - Width / 2, HEIGHT / 2 - Height / 2, Width, Height);
+}
+
 void ShowTitle(const char* title)
 {
 	int x = (WIDTH - 2) / 2 - strlen(title) / 2;
@@ -87,4 +92,13 @@ char* InputBox(const char* Tip, int pwd) {
 void ShowText(const char* Label)
 {
 	printf("  %s\n%c", Label, BLOCK);
+}
+
+void ShowLine()
+{
+	for (int a = 0; a < WIDTH-1; a++) {
+		putc(LINE, stdout);
+	}
+	putc('\n', stdout);
+	putc(BLOCK, stdout);
 }

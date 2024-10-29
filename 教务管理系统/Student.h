@@ -7,6 +7,7 @@
 #ifndef STUDENT
 #define STUDENT
 #include "PublicHead.h"
+#include "DataManage.h"
 #include "CourseList.h"
 
 /**简单类型定义**/
@@ -23,6 +24,7 @@ struct StudentInformation {
 	char *Photo;//照片路径
 	char* Mail;//邮箱
 	char* PhoneNumber;//电话
+	int pwdHash;
 };
 
 // 学生结构体
@@ -31,13 +33,12 @@ struct Student
 	int Id;//学号
 	char* name;//名字
 	StudentInformation Inf;//学生个人信息
-	bool remove;//删除标识
-	CourseID Courselst;
+	ClassID *ClassList;
 };
 
 /**全局变量定义**/
 //保存读取部分学生全体信息
-extern Student* AllStus;
+extern DataCluster AllStu;
 
 /**公开函数**/
 
@@ -111,11 +112,12 @@ StuID DeleteStudent(StuID Id);
 返回值 Student ID NULL:没找到学生或参数不合法，也可能是AllStus没有初始化
 */
 Student* SeekStudent(StuID SeekStu);
+int GetStudentIndex(StuID SeekStu);
 /*
 枚举数据库中学生
 参数1 Index指针，用于标识枚举进度，每次Iterate函数会加一，初始应该设定index为-1
 返回值 Student ID -1:分配内存失败或参数不合法 -2:分配学生ID重复
 */
-inline Student* IterateStudent(int *Index);
+Student* IterateStudent(int *Index);
 
 #endif
